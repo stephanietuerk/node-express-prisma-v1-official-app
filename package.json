@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "postinstall": "tsc",
+    "build": "tsc -p .",
     "test": "jest -i",
     "dev": "ts-node-dev --respawn --pretty --transpile-only src/index.ts dev",
     "start": "node dist/src/index.js",
@@ -15,7 +16,7 @@
     "prisma:seed": "prisma db seed --preview-feature",
     "prisma:studio": "prisma studio",
     "prisma:reset": "prisma migrate reset",
-    "prisma:deploy": "npx prisma migrate deploy && npx prisma generate",
+    "prisma:migrate:deploy": "prisma migrate deploy",
     "prettier:write": "npx prettier --write .",
     "prettier:check": "npx prettier --check .",
     "lint:check": "npx eslint src/**/*.ts",
