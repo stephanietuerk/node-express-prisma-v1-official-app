@@ -10,8 +10,5 @@
       "description": "A secret key for verifying authenticated users",
       "generator": "secret"
     }
-  },
-  "scripts": {
-    "postdeploy": "npx prisma migrate deploy && npx prisma generate"
   }
 }
