@@ -1,10 +1,10 @@
-import express, { NextFunction, Request, Response } from 'express';
-import cors from 'cors';
-import swaggerUi from 'swagger-ui-express';
 import bodyParser from 'body-parser';
-import routes from './routes/routes';
-import HttpException from './models/http-exception.model';
+import cors from 'cors';
+import express, { NextFunction, Request, Response } from 'express';
+import swaggerUi from 'swagger-ui-express';
 import swaggerDocument from '../docs/swagger.json';
+import HttpException from './models/http-exception.model';
+import routes from './routes/routes';
 
 const app = express();
 
@@ -54,7 +54,5 @@ app.use((err: Error | HttpException, req: Request, res: Response, next: NextFunc
  * Server activation
  */
 
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.info(`server up on port ${PORT}`);
-});
+const PORT: number = parseInt(process.env.PORT ?? '', 10) || 3000;
+app.listen(PORT, '0.0.0.0', () => console.log(`API on ${PORT}`));

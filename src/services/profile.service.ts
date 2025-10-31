@@ -1,6 +1,6 @@
-import prisma from '../../prisma/prisma-client';
-import profileMapper from '../utils/profile.utils';
 import HttpException from '../models/http-exception.model';
+import prisma from '../prisma/prisma-client';
+import profileMapper from '../utils/profile.utils';
 import { findUserIdByUsername } from './auth.service';
 
 export const getProfile = async (usernamePayload: string, usernameAuth: string) => {

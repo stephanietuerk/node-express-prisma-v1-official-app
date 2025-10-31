@@ -1,4 +1,4 @@
-import prisma from '../../prisma/prisma-client';
+import prisma from '../prisma/prisma-client';
 
 const getTags = async (username?: string): Promise<string[]> => {
   const queries = [];
