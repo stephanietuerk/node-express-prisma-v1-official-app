@@ -1,8 +1,8 @@
 import slugify from 'slugify';
-import prisma from '../../prisma/prisma-client';
 import HttpException from '../models/http-exception.model';
-import { findUserIdByUsername } from './auth.service';
+import { prisma } from '../prisma/prisma-client';
 import profileMapper from '../utils/profile.utils';
+import { findUserIdByUsername } from './auth.service';
 
 const buildFindAllQuery = (query: any, username: string | undefined) => {
   const queries: any = [];

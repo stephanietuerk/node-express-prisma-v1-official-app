@@ -1,10 +1,10 @@
 import bcrypt from 'bcryptjs';
-import { RegisterInput } from '../models/register-input.model';
-import prisma from '../../prisma/prisma-client';
 import HttpException from '../models/http-exception.model';
+import { RegisterInput } from '../models/register-input.model';
 import { RegisteredUser } from '../models/registered-user.model';
-import generateToken from '../utils/token.utils';
 import { User } from '../models/user.model';
+import prisma from '../prisma/prisma-client';
+import generateToken from '../utils/token.utils';
 
 const checkUserUniqueness = async (email: string, username: string) => {
   const existingUserByEmail = await prisma.user.findUnique({
