@@ -1,18 +1,20 @@
 import { PrismaClient } from '@prisma/client';
 
-// add prisma to the NodeJS global type
-// TODO : downgraded @types/node to 15.14.1 to avoid error on NodeJS.Global
-interface CustomNodeJsGlobal extends NodeJS.Global {
-  prisma: PrismaClient;
+// Augment the global type so TS knows about globalThis.prisma
+declare global {
+  // eslint-disable-next-line no-var
+  var prisma: PrismaClient | undefined;
 }
 
-// Prevent multiple instances of Prisma Client in development
-declare const global: CustomNodeJsGlobal;
+// Use the existing instance in dev, otherwise create a new one
+export const prisma =
+  globalThis.prisma ??
+  new PrismaClient({
+    // log: ['query', 'error', 'warn'], // optional
+  });
 
-const prisma = global.prisma || new PrismaClient();
-
-if (process.env.NODE_ENV === 'development') {
-  global.prisma = prisma;
+if (process.env.NODE_ENV !== 'production') {
+  globalThis.prisma = prisma;
 }
 
 export default prisma;
