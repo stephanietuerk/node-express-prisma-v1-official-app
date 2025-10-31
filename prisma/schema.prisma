@@ -22,7 +22,7 @@ model Article {
   tagList     Tag[]
   author      User      @relation("UserArticles", fields: [authorId], references: [id], onDelete: Cascade)
   authorId    Int
-  favoritedBy User[]    @relation("UserFavorites", references: [id])
+  favoritedBy User[]    @relation("UserFavorites")
   comments    Comment[]
 }
 
@@ -51,8 +51,8 @@ model User {
   image      String?   @default("https://api.realworld.io/images/smiley-cyrus.jpeg")
   bio        String?
   articles   Article[] @relation("UserArticles")
-  favorites  Article[] @relation("UserFavorites", references: [id])
-  followedBy User[]    @relation("UserFollows", references: [id])
-  following  User[]    @relation("UserFollows", references: [id])
+  favorites  Article[] @relation("UserFavorites")
+  followedBy User[]    @relation("UserFollows")
+  following  User[]    @relation("UserFollows")
   comments   Comment[]
 }
