@@ -1,62 +1,33 @@
 import slugify from 'slugify';
 import HttpException from '../models/http-exception.model';
-import { prisma } from '../prisma/prisma-client';
+import prisma from '../prisma/prisma-client';
 import profileMapper from '../utils/profile.utils';
 import { findUserIdByUsername } from './auth.service';
 
-const buildFindAllQuery = (query: any, username: string | undefined) => {
-  const queries: any = [];
-  const orAuthorQuery = [];
-  const andAuthorQuery = [];
+const buildFindAllQuery = (query: any, username?: string) => {
+  const filters: any[] = [];
 
+  // If the caller is authenticated and you want to scope to *their* articles
   if (username) {
-    orAuthorQuery.push({
-      username: {
-        equals: username,
-      },
-    });
+    filters.push({ author: { username } });
   }
 
-  if ('author' in query) {
-    andAuthorQuery.push({
-      username: {
-        equals: query.author,
-      },
-    });
+  // If the request asked for a specific author
+  if (query.author) {
+    filters.push({ author: { username: query.author } });
   }
 
-  const authorQuery = {
-    author: {
-      OR: orAuthorQuery,
-      AND: andAuthorQuery,
-    },
-  };
-
-  queries.push(authorQuery);
-
-  if ('tag' in query) {
-    queries.push({
-      tagList: {
-        some: {
-          name: query.tag,
-        },
-      },
-    });
+  // Tag filter
+  if (query.tag) {
+    filters.push({ tagList: { some: { name: query.tag } } });
   }
 
-  if ('favorited' in query) {
-    queries.push({
-      favoritedBy: {
-        some: {
-          username: {
-            equals: query.favorited,
-          },
-        },
-      },
-    });
+  // Favorited-by filter
+  if (query.favorited) {
+    filters.push({ favoritedBy: { some: { username: query.favorited } } });
   }
 
-  return queries;
+  return filters;
 };
 
 export const getArticles = async (query: any, username?: string) => {
@@ -395,25 +366,11 @@ export const deleteArticle = async (slug: string) => {
 };
 
 export const getCommentsByArticle = async (slug: string, username?: string) => {
-  const queries = [];
-
-  if (username) {
-    queries.push({
-      author: {
-        username,
-      },
-    });
-  }
-
   const comments = await prisma.article.findUnique({
-    where: {
-      slug,
-    },
+    where: { slug },
     include: {
       comments: {
-        where: {
-          OR: queries,
-        },
+        ...(username ? { where: { author: { username } } } : {}), // no filter => return all comments
         select: {
           id: true,
           createdAt: true,
@@ -438,7 +395,7 @@ export const getCommentsByArticle = async (slug: string, username?: string) => {
       username: comment.author.username,
       bio: comment.author.bio,
       image: comment.author.image,
-      following: comment.author.followedBy.some(follow => follow.username === username),
+      following: comment.author.followedBy.some(f => f.username === username),
     },
   }));
 
