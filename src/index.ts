@@ -12,20 +12,30 @@ const app = express();
  * App Configuration
  */
 
+app.set('etag', false);
+app.use((req, res, next) => {
+  res.setHeader('Vary', 'Authorization');
+  res.setHeader('Cache-Control', 'no-store');
+  next();
+});
+
+// CORS + body parsing
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+
+// API routes
 app.use(routes);
 
 // Serves images
 app.use(express.static('public'));
 
+// Root check
 app.get('/', (req: Request, res: Response) => {
   res.json({ status: 'API is running on /api' });
 });
 
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
-
 app.get('/api-docs', (req: Request, res: Response) => {
   res.json({
     swagger:
