@@ -3,16 +3,19 @@
   "version": "1.0.0",
   "description": "Node.js, Express.js & Prisma RealWorld official app",
   "main": "index.js",
+  "prisma": {
+    "seed": "ts-node prisma/seed.ts"
+  },
   "scripts": {
     "postinstall": "prisma generate",
     "build": "tsc -p .",
     "dev": "ts-node-dev --respawn --pretty --transpile-only src/index.ts dev",
     "start": "node dist/index.js",
+    "prisma:seed": "prisma db seed",
     "prisma:generate": "prisma generate",
     "prisma:migrate": "prisma migrate dev --skip-seed",
     "prisma:migrate:deploy": "prisma migrate deploy",
     "prisma:format": "prisma format",
-    "prisma:seed": "prisma db seed",
     "prisma:reset": "prisma migrate reset",
     "prisma:studio": "prisma studio",
     "test": "jest -i",
