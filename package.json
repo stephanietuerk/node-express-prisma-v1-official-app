@@ -4,7 +4,7 @@
   "description": "Node.js, Express.js & Prisma RealWorld official app",
   "main": "index.js",
   "prisma": {
-    "seed": "ts-node prisma/seed.ts"
+    "seed": "ts-node src/prisma/seed.ts"
   },
   "scripts": {
     "postinstall": "prisma generate",
