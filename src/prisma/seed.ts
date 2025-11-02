@@ -3,30 +3,54 @@ import bcrypt from 'bcryptjs';
 
 const userAccounts = [
   {
-    email: 'johndoe@realworld.io',
-    username: 'johndoe',
-    password: 'johndoe123',
-    bio: 'Full-stack developer passionate about clean code and innovative solutions. Love working with modern web technologies.',
+    email: 'sarahchen@realworld.io',
+    username: 'sarahchen',
+    password: 'sarahchen123',
+    bio: 'Data scientist and machine learning engineer. Passionate about turning data into actionable insights.',
     image: null,
     articles: [
       {
-        slug: 'how-to-learn-javascript-effectively',
-        title: 'How to Learn JavaScript Effectively',
+        slug: 'introduction-to-machine-learning-for-developers',
         description:
-          'A comprehensive guide to mastering JavaScript from beginner to advanced level',
-        body: "Learning JavaScript can be overwhelming with so many resources available. Here's a structured approach that has helped thousands of developers master this essential language.\n\n## Start with the Fundamentals\n\nBefore diving into frameworks, master the core concepts: variables, functions, objects, and arrays. Understanding these building blocks is crucial for writing clean, maintainable code.\n\n## Practice with Real Projects\n\nThe best way to learn is by building actual applications. Start with simple projects like a todo list or calculator, then gradually increase complexity.\n\n## Join the Community\n\nEngage with other developers through forums, Discord servers, and local meetups. The JavaScript community is incredibly welcoming and helpful.",
-        tagList: ['beginners', 'javascript', 'programming', 'webdev'],
-        favoritedBy: ['mikewilson', 'sarahchen'],
+          'Getting started with ML concepts and practical applications for software developers',
+        title: 'Introduction to Machine Learning for Developers',
+        body: "Machine learning might seem intimidating, but it's more accessible than ever for developers looking to expand their skillset.\n\n## Understanding the Basics\n\nStart with supervised learning concepts like classification and regression. These form the foundation for more complex ML algorithms.\n\n## Practical Tools and Libraries\n\nPython's scikit-learn is perfect for beginners, while TensorFlow and PyTorch offer more advanced capabilities for deep learning projects.\n\n## Data Preprocessing\n\nMost of ML work involves cleaning and preparing data. Learn to handle missing values, normalize features, and split datasets properly.",
+        tagList: ['ai', 'datascience', 'machinelearning', 'python'],
+        favoritedBy: ['johndoe'],
       },
     ],
     comments: [
       {
+        slug: 'react-hooks-best-practices',
+        body: 'Custom hooks are a game-changer. They make components so much cleaner and more reusable.',
+      },
+    ],
+  },
+  {
+    email: 'mikewilson@realworld.io',
+    username: 'mikewilson',
+    password: 'mikewilson123',
+    bio: 'Backend engineer focused on scalable architecture and DevOps. Enthusiast of cloud technologies and automation.',
+    image: null,
+    articles: [
+      {
         slug: 'building-scalable-apis-with-nodejs',
-        body: 'Connection pooling made such a difference in my API performance. Great advice!',
+        title: 'Building Scalable APIs with Node.js',
+        description:
+          'Architectural patterns and best practices for creating robust backend services',
+        body: 'Building scalable APIs requires careful consideration of architecture, error handling, and performance optimization.\n\n## API Design Principles\n\nFollow RESTful conventions and use appropriate HTTP status codes. Design your API to be intuitive and self-documenting.\n\n## Error Handling Strategy\n\nImplement comprehensive error handling with proper logging and monitoring. Use middleware to handle errors consistently across your application.\n\n## Database Optimization\n\nOptimize database queries and consider implementing caching strategies for frequently accessed data. Connection pooling is essential for production applications.',
+        tagList: ['api', 'architecture', 'backend', 'nodejs'],
+        favoritedBy: ['janesmith'],
+      },
+    ],
+    comments: [
+      {
+        slug: 'introduction-to-machine-learning-for-developers',
+        body: "The data preprocessing section is spot on. It's definitely where most of the work happens in ML projects.",
       },
       {
-        slug: 'react-hooks-best-practices',
-        body: 'useEffect dependencies caught me so many times when I was learning React. Wish I had read this earlier!',
+        slug: 'how-to-learn-javascript-effectively',
+        body: 'The project-based approach really works. I built three projects following this guide and learned so much!',
       },
     ],
   },
@@ -62,54 +86,30 @@ const userAccounts = [
     ],
   },
   {
-    email: 'mikewilson@realworld.io',
-    username: 'mikewilson',
-    password: 'mikewilson123',
-    bio: 'Backend engineer focused on scalable architecture and DevOps. Enthusiast of cloud technologies and automation.',
+    email: 'johndoe@realworld.io',
+    username: 'johndoe',
+    password: 'johndoe123',
+    bio: 'Full-stack developer passionate about clean code and innovative solutions. Love working with modern web technologies.',
     image: null,
     articles: [
-      {
-        slug: 'building-scalable-apis-with-nodejs',
-        title: 'Building Scalable APIs with Node.js',
-        description:
-          'Architectural patterns and best practices for creating robust backend services',
-        body: 'Building scalable APIs requires careful consideration of architecture, error handling, and performance optimization.\n\n## API Design Principles\n\nFollow RESTful conventions and use appropriate HTTP status codes. Design your API to be intuitive and self-documenting.\n\n## Error Handling Strategy\n\nImplement comprehensive error handling with proper logging and monitoring. Use middleware to handle errors consistently across your application.\n\n## Database Optimization\n\nOptimize database queries and consider implementing caching strategies for frequently accessed data. Connection pooling is essential for production applications.',
-        tagList: ['api', 'architecture', 'backend', 'nodejs'],
-        favoritedBy: ['janesmith'],
-      },
-    ],
-    comments: [
-      {
-        slug: 'introduction-to-machine-learning-for-developers',
-        body: "The data preprocessing section is spot on. It's definitely where most of the work happens in ML projects.",
-      },
       {
         slug: 'how-to-learn-javascript-effectively',
-        body: 'The project-based approach really works. I built three projects following this guide and learned so much!',
-      },
-    ],
-  },
-  {
-    email: 'sarahchen@realworld.io',
-    username: 'sarahchen',
-    password: 'sarahchen123',
-    bio: 'Data scientist and machine learning engineer. Passionate about turning data into actionable insights.',
-    image: null,
-    articles: [
-      {
-        slug: 'introduction-to-machine-learning-for-developers',
+        title: 'How to Learn JavaScript Effectively',
         description:
-          'Getting started with ML concepts and practical applications for software developers',
-        title: 'Introduction to Machine Learning for Developers',
-        body: "Machine learning might seem intimidating, but it's more accessible than ever for developers looking to expand their skillset.\n\n## Understanding the Basics\n\nStart with supervised learning concepts like classification and regression. These form the foundation for more complex ML algorithms.\n\n## Practical Tools and Libraries\n\nPython's scikit-learn is perfect for beginners, while TensorFlow and PyTorch offer more advanced capabilities for deep learning projects.\n\n## Data Preprocessing\n\nMost of ML work involves cleaning and preparing data. Learn to handle missing values, normalize features, and split datasets properly.",
-        tagList: ['ai', 'datascience', 'machinelearning', 'python'],
-        favoritedBy: ['johndoe'],
+          'A comprehensive guide to mastering JavaScript from beginner to advanced level',
+        body: "Learning JavaScript can be overwhelming with so many resources available. Here's a structured approach that has helped thousands of developers master this essential language.\n\n## Start with the Fundamentals\n\nBefore diving into frameworks, master the core concepts: variables, functions, objects, and arrays. Understanding these building blocks is crucial for writing clean, maintainable code.\n\n## Practice with Real Projects\n\nThe best way to learn is by building actual applications. Start with simple projects like a todo list or calculator, then gradually increase complexity.\n\n## Join the Community\n\nEngage with other developers through forums, Discord servers, and local meetups. The JavaScript community is incredibly welcoming and helpful.",
+        tagList: ['beginners', 'javascript', 'programming', 'webdev'],
+        favoritedBy: ['mikewilson', 'sarahchen'],
       },
     ],
     comments: [
       {
+        slug: 'building-scalable-apis-with-nodejs',
+        body: 'Connection pooling made such a difference in my API performance. Great advice!',
+      },
+      {
         slug: 'react-hooks-best-practices',
-        body: 'Custom hooks are a game-changer. They make components so much cleaner and more reusable.',
+        body: 'useEffect dependencies caught me so many times when I was learning React. Wish I had read this earlier!',
       },
     ],
   },
