@@ -1,12 +1,8 @@
 # ![Rails Example App](media/realworld.png)
 
-> Official NodeJS codebase that adheres to the [RealWorld](https://gothinkster.github.io/realworld/docs/specs/backend-specs/introduction) API spec.
+> This is a NodeJS codebase that adheres to the [RealWorld](https://gothinkster.github.io/realworld/docs/specs/backend-specs/introduction) API spec.
 
 This repo is functionality complete.
-
-# Deploy to Heroku
-
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/stephanietuerk/node-express-prisma-v1-official-app)
 
 # Getting started
 
