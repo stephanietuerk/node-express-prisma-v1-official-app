@@ -15,7 +15,7 @@ export const getProfile = async (usernamePayload: string, usernameAuth?: string)
       followedBy: usernameAuth
         ? {
             where: { username: usernameAuth },
-            select: { id: true },
+            select: { username: true },
             take: 1,
           }
         : false,
