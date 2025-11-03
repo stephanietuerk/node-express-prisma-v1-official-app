@@ -12,9 +12,18 @@ const buildFindAllQuery = (query: any) => {
     filters.push({ author: { username: query.author } });
   }
 
-  // Tag filter
-  if (query.tag) {
-    filters.push({ tagList: { some: { name: query.tag } } });
+  // Tags filter
+  if (typeof query.tags === 'string') {
+    const tags = query.tags.split(',').map((tag: string) => tag.trim());
+    if (tags.length > 0) {
+      filters.push({
+        tagList: {
+          some: {
+            name: { in: tags },
+          },
+        },
+      });
+    }
   }
 
   // Favorited-by filter
