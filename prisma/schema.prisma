@@ -48,7 +48,7 @@ model User {
   email      String    @unique
   username   String    @unique
   password   String
-  image      String?   @default("https://api.realworld.io/images/smiley-cyrus.jpeg")
+  image      String?   @default("https://node-express-prisma-v1-official-app-9erx.onrender.com/images/smiley-cyrus.jpeg")
   bio        String?
   articles   Article[] @relation("UserArticles")
   favorites  Article[] @relation("UserFavorites")

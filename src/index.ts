@@ -28,7 +28,16 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(routes);
 
 // Serves images
-app.use(express.static('public'));
+app.use(
+  '/images',
+  cors({ origin: '*' }), // or restrict to your frontend origin(s)
+  express.static('public/images', {
+    setHeaders: res => {
+      res.setHeader('Cache-Control', 'public, max-age=31536000, immutable');
+      res.setHeader('Access-Control-Allow-Origin', '*');
+    },
+  }),
+);
 
 // Root check
 app.get('/', (req: Request, res: Response) => {
