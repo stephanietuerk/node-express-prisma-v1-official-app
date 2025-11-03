@@ -4,13 +4,8 @@ import prisma from '../prisma/prisma-client';
 import profileMapper from '../utils/profile.utils';
 import { findUserIdByUsername } from './auth.service';
 
-const buildFindAllQuery = (query: any, username?: string) => {
+const buildFindAllQuery = (query: any) => {
   const filters: any[] = [];
-
-  // If the caller is authenticated and you want to scope to *their* articles
-  if (username) {
-    filters.push({ author: { username } });
-  }
 
   // If the request asked for a specific author
   if (query.author) {
@@ -31,7 +26,7 @@ const buildFindAllQuery = (query: any, username?: string) => {
 };
 
 export const getArticles = async (query: any, username?: string) => {
-  const andQueries = buildFindAllQuery(query, username);
+  const andQueries = buildFindAllQuery(query);
   const articlesCount = await prisma.article.count({
     where: {
       AND: andQueries,
