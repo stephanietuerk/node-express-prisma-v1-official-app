@@ -63,7 +63,7 @@ export const followUser = async (usernamePayload: string, usernameAuth: string) 
       image: true,
       followedBy: {
         where: { id: follower.id },
-        select: { id: true },
+        select: { username: true },
         take: 1,
       },
     },
@@ -102,7 +102,7 @@ export const unfollowUser = async (usernamePayload: string, usernameAuth: string
       image: true,
       followedBy: {
         where: { id: follower.id },
-        select: { id: true },
+        select: { username: true },
         take: 1,
       },
     },
